@@ -70,8 +70,8 @@ class DockerHubHandler(tornado.web.RequestHandler):
 
         try:
             service = cli.services.get(services[new_image])
-            service.update(new_image)
-            logging.info('Updated {}'.format(new_image))
+            service.update(image=new_image)
+            logging.info('Updated {}'.format(service.name))
         except KeyError:
             pass
 
