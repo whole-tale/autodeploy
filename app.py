@@ -26,6 +26,7 @@ import tornado.ioloop
 import tornado.web
 import tornado.escape
 import tornado.httpclient
+import tornado.log
 import docker
 
 
@@ -105,6 +106,7 @@ class DockerHubHandler(tornado.web.RequestHandler):
 
 if __name__ == "__main__":
     logging.getLogger().setLevel(logging.INFO)
+    tornado.log.enable_pretty_logging()
     app = tornado.web.Application([(r"/", DockerHubHandler, {})])
     app.listen(8081)
     tornado.ioloop.IOLoop.current().start()
