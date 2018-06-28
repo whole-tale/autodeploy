@@ -56,6 +56,7 @@ class DockerHubHandler(tornado.web.RequestHandler):
     @tornado.concurrent.run_on_executor
     def redeploy_stack(self, payload):
         """Update service using POST's payload."""
+        logging.info(payload)
         repo = payload['repository']
         tag = payload['push_data']['tag']
         new_image = '{}:{}'.format(repo['repo_name'], tag)
@@ -105,7 +106,7 @@ class DockerHubHandler(tornado.web.RequestHandler):
 
 
 if __name__ == "__main__":
-    logging.getLogger().setLevel(logging.INFO)
+    logging.getLogger().setLevel(logging.DEBUG)
     tornado.log.enable_pretty_logging()
     app = tornado.web.Application([(r"/", DockerHubHandler, {})])
     app.listen(8081)
