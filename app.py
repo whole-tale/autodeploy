@@ -72,7 +72,7 @@ class DockerHubHandler(tornado.web.RequestHandler):
 
         try:
             service = cli.services.get(services[new_image])
-            service.update(image=new_image)
+            service.update(image=new_image, force_update=True)
             logging.info('Updated {}'.format(service.name))
         except KeyError:
             pass
@@ -106,7 +106,7 @@ class DockerHubHandler(tornado.web.RequestHandler):
 
 
 if __name__ == "__main__":
-    logging.getLogger().setLevel(logging.DEBUG)
+    logging.getLogger().setLevel(logging.INFO)
     tornado.log.enable_pretty_logging()
     app = tornado.web.Application([(r"/", DockerHubHandler, {})])
     app.listen(8081)
